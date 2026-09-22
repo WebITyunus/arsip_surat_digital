@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Petugas;
 
+use App\Models\Pokja;
 use App\Models\Role;
 use App\Models\Unit;
 use App\Models\User;
@@ -27,8 +28,11 @@ public $password_confirmation = '';
     #[Validate('required|string|max:255')]
     public $role;
 
-#[Validate('required|exists:units,id')]
+#[Validate('exists:units,id')]
 public $unit_id = '';
+
+#[Validate('exists:pokjars,id')]
+public $pokja_id = '';
 
     #[Validate('required|boolean')]
     public $is_active = 1;
@@ -42,7 +46,8 @@ $user = User::create([
     'username' => $this->username,
     'email' => $this->email ?: null,
     'password' => Hash::make($this->password),
-    'unit_id' => $this->unit_id,
+    'unit_id' => $this->unit_id ?: null,
+    'pokja_id' => $this->pokja_id ?: null,
     'is_active' => $this->is_active,
 ]);
 
@@ -74,9 +79,10 @@ public function render()
       $roles = Role::where('guard_name', 'web')
         ->orderBy('name')
         ->get();
+        $pokjars= Pokja::select(['id','nama','kode'])->get();
 
     return view('livewire.petugas.create', [
-        'units' => $units,'roles' => $roles
+        'units' => $units,'roles' => $roles,'pokjars' => $pokjars
     ]);
 }
 }
