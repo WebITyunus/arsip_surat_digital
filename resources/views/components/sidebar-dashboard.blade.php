@@ -120,7 +120,21 @@
         </a>
     @endcan
 
+    @can('halaman.poka-user')
 {{-- Simpan File Pokja --}}
+<a href="{{ route('halaman-pokja-user') }}"
+    class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition
+    {{ request()->routeIs('ihalaman-pokja-user*') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100' }}">
+
+    <i class="fas fa-folder-open w-5 text-center"></i>
+
+    Simpan File Pokja Per User
+</a>
+
+    @endcan
+
+{{-- Simpan File Pokja --}}
+@can('halaman.pokja-admin')
 <a href="{{ route('index-pokja') }}"
     class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition
     {{ request()->routeIs('index-pokja*') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100' }}">
@@ -129,6 +143,8 @@
 
     Simpan File Pokja
 </a>
+
+@endcan
 
 
     <hr class="my-4 border-gray-200" />

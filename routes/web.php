@@ -21,6 +21,10 @@ use App\Livewire\Pks\CreatePks;
 use App\Livewire\Pks\DetailPks;
 use App\Livewire\Pks\Index as PksIndex;
 use App\Livewire\Pks\UpdatePks;
+use App\Livewire\Pokja\Create as PokjaCreate;
+use App\Livewire\Pokja\Detail as PokjaDetail;
+use App\Livewire\Pokja\Index as PokjaIndex;
+use App\Livewire\Pokja\Update as PokjaUpdate;
 use App\Livewire\Pokjar\Index as PokjarIndex;
 use App\Livewire\Pokjar\Update as PokjarUpdate;
 use App\Livewire\Pokjars\Create as PokjarsCreate;
@@ -147,13 +151,18 @@ Route::get('/pokja',PokjarIndex::class)->middleware('permission:unit.view')->nam
 Route::get('/pokja/{pokja}',PokjarUpdate::class)->middleware('permission:unit.view')->name('edit-pokja');
 // akhir pokja
 
-// awal simpan file pokja
-Route::get('/index-pokja',PokjarsIndex::class)->name('index-pokja');
+// awal simpan file pokja admin
+Route::get('/index-pokja',PokjarsIndex::class)->middleware('permission:halaman.pokja-admin')->name('index-pokja');
 Route::get('/tambah-pokja',PokjarsCreate::class)->name('tambah-pokja');
 Route::get('/edit-pokjars/{pokja}',PokjarsUpdate::class)->name('edit-pokjars');
 Route::get('/detail-pokjars/detail/{pokja}',PokjarsDetail::class)->name('detail-pokjars');
+// akhir simpan file pokja admin
 
-
+// awal simpan file poka per pokja
+Route::get('index-halaman-pokja',PokjaIndex::class)->middleware('permission:halaman.poka-user')->name('halaman-pokja-user');
+Route::get('create-halaman-pokja',PokjaCreate::class)->name('create-pokja-user');
+Route::get('edit-halaman-pokja/{pokja}',PokjaUpdate::class)->name('edit-pokja-user');
+Route::get('detail-halaman-pokja/{pokja}',PokjaDetail::class)->name('detail-pokja-user');
 
 
 

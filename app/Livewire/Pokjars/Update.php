@@ -17,7 +17,6 @@ class Update extends Component
 
 public Pokjars $pokja;
 
-public $nomor_surat;
 public $tanggal_surat;
 public $isi;
 public $pokja_id;
@@ -30,7 +29,6 @@ public function mount(Pokjars $pokja)
 {
     $this->pokja = $pokja->load('files');
 
-    $this->nomor_surat = $pokja->nomor_surat;
     $this->tanggal_surat = $pokja->tanggal_surat;
     $this->isi = $pokja->isi;
     $this->pokja_id = $pokja->pokja_id;
@@ -44,7 +42,6 @@ public function UpdatePokja()
     // Validasi
     $this->validate([
         'tanggal_surat' => 'required|date',
-        'nomor_surat' => 'required|string|max:255',
         'isi' => 'required|string',
         'lampiran' => 'nullable|array',
         'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
@@ -59,7 +56,6 @@ public function UpdatePokja()
 
             $this->pokja->update([
                 'tanggal_surat' => $this->tanggal_surat,
-                'nomor_surat' => $this->nomor_surat,
                 'isi' => $this->isi,
                 'pokja_id' => $this->pokja_id,
             ]);

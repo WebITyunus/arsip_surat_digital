@@ -16,6 +16,11 @@ class Index extends Component
 
     public $query = '';
 
+
+    public function updatedQuery()
+    {
+        $this->resetPage();
+    }
 public function delete($id)
 {
     $surat = SuratMasuk::findOrFail($id);
@@ -46,11 +51,6 @@ public function delete($id)
         );
 
 }
-    public function updatedQuery()
-    {
-        $this->resetPage();
-    }
-
 public function render()
 {
     $datasurat = SuratMasuk::query()

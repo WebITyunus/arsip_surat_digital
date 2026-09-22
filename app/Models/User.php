@@ -17,6 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
     'username',
     'email',
     'unit_id',
+    'pokja_id',
     'password',
     'is_active',])]
 
