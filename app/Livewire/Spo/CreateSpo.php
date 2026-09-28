@@ -26,17 +26,34 @@ class CreateSpo extends Component
     public $isi = '';
 
     #[Validate([
-        'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
+        'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:15360',
     ])]
     public $lampiran = [];
 
 protected $rules = [
-    'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
+    'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:115360',
 ];
+
+public function removeLampiran($index)
+{
+    unset($this->lampiran[$index]);
+
+    $this->lampiran = array_values($this->lampiran);
+}
+
+
+private function canGenerateNomorSurat()
+{
+    $user = Auth::user();
+
+    return !$user->unit_id && !$user->pokja_id;
+}
 
 public function mount()
 {
-    $this->generateNomorSurat();
+    if ($this->canGenerateNomorSurat()) {
+        $this->generateNomorSurat();
+    }
 }
 
 private function generateNomorSurat()
@@ -59,6 +76,7 @@ private function generateNomorSurat()
     ];
 
     $unitId = Auth::user()->unit_id;
+    $pokja_id = Auth::user()->pokja_id;
 
     if ($unitId) {
 
@@ -70,7 +88,17 @@ private function generateNomorSurat()
             ->where('tahun', $tahun)
             ->max('nomor');
 
-    } else {
+    } elseif ($pokja_id) {
+
+        // =========================
+        // SPO PER UNIT
+        // =========================
+
+        $nomorTerakhir = Spo::where('pokja_id', $pokja_id)
+            ->where('tahun', $tahun)
+            ->max('nomor');
+
+    }else {
 
         // =========================
         // SPO PUSAT / LAMA
@@ -108,7 +136,6 @@ private function generateNomorSurat()
     );
 }
 
-
 public function SimpanSpo()
 {
     $this->validate();
@@ -125,6 +152,7 @@ $nomor = (int) explode('/', $this->nomor_surat)[0];
 
 $surat = Spo::create([
     'unit_id' => Auth::user()->unit_id,
+    'pokja_id' => Auth::user()->pokja_id,
     'tahun' => $tahun,
     'nomor' => $nomor,
     'tanggal_surat' => $this->tanggal_surat,
@@ -163,10 +191,11 @@ $surat = Spo::create([
         );
 
         // Bersihkan form setelah berhasil
-        $this->reset();
-        $this->generateNomorSurat();
+$this->reset();
 
-
+if ($this->canGenerateNomorSurat()) {
+    $this->generateNomorSurat();
+}
 
     } catch (\Throwable $e) {
 
@@ -185,13 +214,6 @@ $surat = Spo::create([
             message: 'Surat gagal disimpan.'
         );
     }
-}
-
-public function removeLampiran($index)
-{
-    unset($this->lampiran[$index]);
-
-    $this->lampiran = array_values($this->lampiran);
 }
 
 

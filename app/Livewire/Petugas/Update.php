@@ -35,6 +35,7 @@ public function mount(User $user)
     $this->username = $user->username;
     $this->email = $user->email;
     $this->unit_id = $user->unit_id;
+    $this->pokja_id = $user->pokja_id;
     $this->is_active = $user->is_active;
 
     // Ambil role Spatie user
@@ -53,7 +54,7 @@ public function mount(User $user)
 
             'role' => 'required|string|max:255',
 
-            'pokja_id' => 'nullable|exists:pokjas,id',
+            'pokja_id' => 'nullable|exists:pokjars,id',
 
             'is_active' => 'required|boolean',
         ];
@@ -70,6 +71,7 @@ $data = [
     'username' => $this->username,
     'email' => $this->email ?: null,
     'unit_id' => $this->unit_id ?: null,
+    'pokja_id' => $this->pokja_id ?: null,
     'is_active' => $this->is_active,
 ];
 
@@ -110,9 +112,13 @@ $this->user->syncRoles([$this->role]);
         'name'
     ])->get();
 
+        $pokjars= Pokja::select(['id','nama','kode'])->get();
+
+
     return view('livewire.petugas.update', [
         'units' => $units,
         'roles' => $roles,
+        'pokjars' => $pokjars
     ]);
 }
 }

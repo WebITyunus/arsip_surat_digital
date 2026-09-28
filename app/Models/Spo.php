@@ -10,6 +10,7 @@ class Spo extends Model
 {
     protected $table='spo';
         protected $fillable = [
+        'pokja_id',
         'unit_id',
         'tahun',
         'nomor',
@@ -30,6 +31,11 @@ class Spo extends Model
     public function unit()
 {
     return $this->belongsTo(Unit::class);
+}
+
+public function pokja(): BelongsTo
+{
+    return $this->belongsTo(Pokja::class,'pokja_id');
 }
 
 }

@@ -80,7 +80,7 @@
         </a>
     @endcan
 
-@if (!Auth::user()->pokja_id)
+{{-- @if (!Auth::user()->pokja_id) --}}
     @can('spo.view')
         <a href="{{ route('surat-spo') }}"
             class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition
@@ -90,7 +90,7 @@
             Standar Prosedur Operasional
         </a>
     @endcan
-@endif
+{{-- @endif --}}
 
     {{-- Sertifikat --}}
     @can('sertifikat.view')
@@ -122,6 +122,7 @@
         </a>
     @endcan
 
+    @if (Auth::user()->pokja_id)
     @can('halaman.poka-user')
 {{-- Simpan File Pokja --}}
 <a href="{{ route('halaman-pokja-user') }}"
@@ -132,6 +133,7 @@
 
     Simpan File Pokja Per User
 </a>
+@endif
 
     @endcan
 

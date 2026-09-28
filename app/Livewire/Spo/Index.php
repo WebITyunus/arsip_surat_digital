@@ -61,6 +61,8 @@ public function render()
             $user->unit_id !== null,
             function ($query) use ($user) {
                 $query->where('unit_id', $user->unit_id);
+            },function ($query) use ($user) {
+                $query->where('pokja_id', $user->pokja_id);
             },
             function ($query) {
                 $query->whereNull('unit_id');

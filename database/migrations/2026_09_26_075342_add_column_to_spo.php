@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('surat_pokjars', function (Blueprint $table) {
-          $table->foreignId('author_id')
+        Schema::table('spo', function (Blueprint $table) {
+             $table->foreignId('pokja_id')
         ->nullable()
         ->after('id')
-        ->constrained('users')
+        ->constrained('pokjars')
         ->nullOnDelete();
-
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('surat_pokjars', function (Blueprint $table) {
+        Schema::table('spo', function (Blueprint $table) {
             //
         });
     }

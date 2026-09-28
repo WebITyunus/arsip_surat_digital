@@ -54,7 +54,12 @@ class Index extends Component
 
     public function render()
     {
-        $datasurat = SuratKeluar::query()->where('nomor_surat','like','%' . $this->query. '%')->paginate(10);
+        $datasurat = SuratKeluar::query()
+        ->where(function ($query) {
+            $query->where('nomor_surat', 'like', '%' . $this->query . '%')
+                  ->orWhere('isi', 'like', '%' . $this->query . '%');
+        })
+        ->paginate(10);
         return view('livewire.surat-keluar.index',['datasurat' => $datasurat]);
     }
 }

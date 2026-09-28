@@ -43,9 +43,9 @@ class Create extends Component
     ])]
     public $lampiran = [];
 
-protected $rules = [
-    'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
-];
+// protected $rules = [
+//     'lampiran.*' => 'file|mimes:pdf,jpg,jpeg,png|max:5120',
+// ];
 
     public function mount()
 {

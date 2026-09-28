@@ -131,7 +131,6 @@
                                 <td class="px-4 md:px-6 py-4">{{ $pokjars->firstItem() + $loop->index }}</td>
                                 <td class="px-4 md:px-6 py-4 font-medium text-gray-800">{{ $data->nomor_surat }}</td>
                                 <td class="px-4 md:px-6 py-4 text-gray-700 max-w-[180px] truncate">{{ $data->isi }}</td>
-                                <td class="px-4 md:px-6 py-4"><span class="badge bg-emerald-50 text-white-700 border border-emerald-200">{{ $data->pokjars->nama }}</span></td>
 
                                 <td class="px-4 md:px-6 py-4 hidden md:table-cell text-gray-500">{{ $data->tanggal_surat }}</td>
                                 <td class="px-4 md:px-6 py-4"><span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200">{{ $data->author->name ?? 'Tanpa Nama' }}</span></td>
