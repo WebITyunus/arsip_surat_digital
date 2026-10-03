@@ -75,6 +75,16 @@
                                 <td class="px-4 md:px-6 py-4"><span class="badge bg-emerald-50 text-emerald-700 border border-emerald-200">{{ $data->author->name ?? 'Tanpa Nama' }}</span></td>
                                 <td class="px-4 md:px-6 py-4 text-right">
                                     <div class="flex items-center justify-end gap-1">
+                                              @if ($data->files->isNotEmpty())
+                        <a href="{{ Storage::url($data->files->first()->path) }}"
+                           target="_blank"
+                           title="Lihat File"
+                           class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-500 transition">
+                            <i class="fas fa-file-pdf"></i>
+                        </a>
+                    @else
+                        ➖
+                    @endif
                                         <a href="/detail-spo/{{ $data->id }}" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 transition"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('edit-spo',$data) }}" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 transition"><i class="fas fa-edit"></i></a>
                                         <button  type="button"

@@ -256,6 +256,7 @@
                             <a href="/surat-masuk" class="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-medium transition text-center">
                                 Kembali
                             </a>
+
                             <button
         type="submit"
         wire:loading.attr="disabled"

@@ -88,6 +88,16 @@
                     @else
                         ➖
                     @endif
+                                              @if ($data->files->isNotEmpty())
+                        <a href="{{ Storage::url($data->files->first()->path) }}"
+                           target="_blank"
+                           title="Lihat File"
+                           class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-500 transition">
+                            <i class="fas fa-file-pdf"></i>
+                        </a>
+                    @else
+                        ➖
+                    @endif
                                         <a href="/detail-keputusan/{{ $data->id }}" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 transition"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('edit-keputusan',$data) }}" class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 transition"><i class="fas fa-edit"></i></a>
                                         <button  type="button"

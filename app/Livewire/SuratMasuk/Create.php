@@ -86,6 +86,7 @@ private function generateNomorSurat()
         $tahun
     );
 }
+
     public function SimpanSuratMasuk()
     {
         $this->validate();
