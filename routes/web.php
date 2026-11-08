@@ -58,6 +58,9 @@ use App\Livewire\SuratMasuk\Index as SuratMasukIndex;
 use App\Livewire\Unit\Index as UnitIndex;
 use App\Livewire\Unit\Update as UnitUpdate;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Ai\SuratGenerator;
+use App\Livewire\Ai\SuratRevisi;
+use App\Livewire\Ai\TanyaAi;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -165,7 +168,12 @@ Route::get('edit-halaman-pokja/{pokja}',PokjaUpdate::class)->name('edit-pokja-us
 Route::get('detail-halaman-pokja/{pokja}',PokjaDetail::class)->name('detail-pokja-user');
 
 
-
+    Route::get('/ai/surat-generator', SuratGenerator::class)
+        ->name('ai.surat-generator');
+        Route::get('/ai/revisi-surat', SuratRevisi::class)
+    ->name('ai.revisi-surat');
+    Route::get('/tanya-ai', TanyaAi::class)
+    ->name('tanya-ai');
 
 
 });

@@ -151,7 +151,7 @@
 @endcan
 
 
-    <hr class="my-4 border-gray-200" />
+<hr class="my-4 border-gray-200" />
 
     {{-- Pengaturan (tampil untuk semua) --}}
     <a href="{{ route('profile.edit') }}"
@@ -181,18 +181,44 @@
         </a>
     @endcan
 
-        @can('unit.view')
- {{-- Nama Pokja --}}
-<a href="{{ route('pokja') }}"
-    class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition
-    {{ request()->routeIs('pokja*') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100' }}">
-
-    <i class="fas fa-clipboard-list w-5 text-center"></i>
-
-    Nama Pokja
-</a>
-
+    @can('unit.view')
+        {{-- Nama Pokja --}}
+        <a href="{{ route('pokja') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition
+            {{ request()->routeIs('pokja*') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100' }}">
+            <i class="fas fa-clipboard-list w-5 text-center"></i>
+            Nama Pokja
+        </a>
     @endcan
+
+    {{-- Menu AI Assistant --}}
+    <div class="pt-2 mt-2 border-t border-gray-200">
+        <span class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">AI Assistant</span>
+
+        {{-- Membuat Teks dengan AI --}}
+        {{-- <a href="{{ route('ai.surat-generator') }}" wire:navigate
+            class="flex items-center justify-between px-4 py-3 mt-1 text-sm font-medium rounded-xl transition
+            {{ request()->routeIs('ai.surat-generator*') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100' }}">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-wand-magic-sparkles w-5 text-center text-blue-500"></i>
+                <span>Buat Surat AI</span>
+            </div>
+            <span class="px-2 py-0.5 text-[10px] font-bold bg-blue-600 text-white rounded-full animate-pulse">New</span>
+        </a> --}}
+
+        {{-- Revisi File dengan AI --}}
+        <a href="{{ route('tanya-ai') }}" wire:navigate
+            class="flex items-center justify-between px-4 py-3 mt-1 text-sm font-medium rounded-xl transition
+            {{ request()->routeIs('tanya-ai*') ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:bg-gray-100' }}">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-file-pen w-5 text-center text-indigo-500"></i>
+                <span>ChatArdi</span>
+            </div>
+            <span class="px-2 py-0.5 text-[10px] font-bold bg-blue-600 text-white rounded-full animate-pulse">New</span>
+        </a>
+    </div>
+
+
 
     {{-- Logout --}}
     <form method="POST" action="{{ route('logout') }}">

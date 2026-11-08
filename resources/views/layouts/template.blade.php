@@ -63,7 +63,7 @@
             letter-spacing: 0.01em;
         }
     </style>
-
+@livewireStyles
 </head>
 <body>
 
@@ -86,24 +86,27 @@
 
 <!-- ========== SIDEBAR TOGGLE SCRIPT ========== -->
 <script>
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('sidebarToggle');
+   const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('sidebarToggle');
+
+if (sidebar && toggleBtn) {
 
     toggleBtn.addEventListener('click', () => {
         sidebar.classList.toggle('hidden-mobile');
     });
 
-    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
         if (window.innerWidth < 768) {
-            const isClickInside = sidebar.contains(e.target) || toggleBtn.contains(e.target);
+            const isClickInside =
+                sidebar.contains(e.target) ||
+                toggleBtn.contains(e.target);
+
             if (!isClickInside && !sidebar.classList.contains('hidden-mobile')) {
                 sidebar.classList.add('hidden-mobile');
             }
         }
     });
 
-    // Reset on resize to desktop
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 768) {
             sidebar.classList.remove('hidden-mobile');
@@ -111,7 +114,7 @@
             sidebar.classList.add('hidden-mobile');
         }
     });
-
+}
 
 </script>
 
@@ -169,6 +172,6 @@
     </script>
 @endif
 
-
+@livewireScripts
 </body>
 </html>

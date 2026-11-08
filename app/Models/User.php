@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\SuratMasuk;
+use App\Models\Unit;
+use App\Models\Spo;
+    use Laravel\Ai\Concerns\HasConversations;
 
 
 #[Fillable([    'name',
@@ -25,7 +29,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable,HasRoles;
+        use HasFactory, Notifiable, HasRoles, HasConversations;
 
     /**
      * Get the attributes that should be cast.
